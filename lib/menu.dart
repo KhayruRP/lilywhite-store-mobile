@@ -8,9 +8,10 @@ class MyHomePage extends StatelessWidget {
     final String kelas = "F"; //kelas
 
   final List<ItemHomepage> items = [
-    ItemHomepage("See Football News", Icons.newspaper),
-    ItemHomepage("Add News", Icons.add),
-    ItemHomepage("Logout", Icons.logout),
+    ItemHomepage("All Products", Icons.newspaper, color: const Color.fromARGB(255, 0, 95, 210)),
+    
+    ItemHomepage("My Products", Icons.logout, color: const Color.fromARGB(255, 7, 93, 22)),
+    ItemHomepage("Create Product", Icons.add, color: const Color.fromARGB(255, 255, 34, 34)),
   ];
 
    @override
@@ -21,7 +22,7 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         // Judul aplikasi "Football News" dengan teks putih dan tebal.
         title: const Text(
-          'Football News',
+          'Lilywhite Store',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -60,7 +61,7 @@ class MyHomePage extends StatelessWidget {
                   const Padding(
                     padding: EdgeInsets.only(top: 16.0),
                     child: Text(
-                      'Selamat datang di Football News',
+                      'Selamat datang di Lilywhite Store!',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18.0,
@@ -132,8 +133,10 @@ class InfoCard extends StatelessWidget {
 class ItemHomepage {
  final String name;
  final IconData icon;
+  final Color color;
 
- ItemHomepage(this.name, this.icon);
+  // color is optional and defaults to blue if not provided
+  ItemHomepage(this.name, this.icon, {this.color = Colors.blue});
 }
 
 class ItemCard extends StatelessWidget {
@@ -147,7 +150,7 @@ class ItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       // Menentukan warna latar belakang dari tema aplikasi.
-      color: Theme.of(context).colorScheme.secondary,
+      color: item.color,
       // Membuat sudut kartu melengkung.
       borderRadius: BorderRadius.circular(12),
 
