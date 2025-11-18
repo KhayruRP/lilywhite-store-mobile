@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lilywhite_store_mobile/widgets/left_drawer.dart';
-import 'package:lilywhite_store_mobile/widgets/itemscard.dart';
+import 'package:lilywhite_store_mobile/widgets/items_card.dart';
 
 class MyHomePage extends StatelessWidget {
     MyHomePage({super.key, required ColorScheme colorScheme});
@@ -10,9 +10,9 @@ class MyHomePage extends StatelessWidget {
     final String kelas = "F"; //kelas
 
   final List<ItemHomepage> items = [
-    ItemHomepage("All Products", Icons.newspaper, color: const Color.fromARGB(255, 0, 95, 210)),
+    ItemHomepage("See Football Products", Icons.newspaper, color: const Color.fromARGB(255, 0, 95, 210)),
     
-    ItemHomepage("My Products", Icons.logout, color: const Color.fromARGB(255, 7, 93, 22)),
+    ItemHomepage("My Products", Icons.shopping_bag, color: const Color.fromARGB(255, 7, 93, 22)),
     ItemHomepage("Create Product", Icons.add, color: const Color.fromARGB(255, 255, 34, 34)),
   ];
 

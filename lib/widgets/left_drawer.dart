@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lilywhite_store_mobile/screens/menu.dart';
 import 'package:lilywhite_store_mobile/screens/itemlist_form.dart';
+import 'package:lilywhite_store_mobile/screens/items_entry_list.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -57,6 +58,17 @@ ListTile(
           );
   },
 ), // TODO: Bagian routing
+ListTile(
+    leading: const Icon(Icons.add_reaction_rounded),
+    title: const Text('Items List'),
+    onTap: () {
+        // Route to items list page
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const ItemsEntryListPage()),
+        );
+    },
+),
         ],
       ),
     );
