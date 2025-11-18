@@ -20,32 +20,24 @@ class _MyItemsPageState extends State<MyItemsPage> {
     // If you using chrome,  use URL http://localhost:8000
     
     try {
-      // First, get the current user info
-      final userResponse = await request.get('http://localhost:8000/auth/user/');
-      String currentUsername = userResponse['username'] ?? '';
-      
-      // Then, fetch all items
-      final response = await request.get('http://localhost:8000/json/');
-      
-      // Decode response to json format
+      // Use server-side filter endpoint to get only current user's items
+      // (backend should use session/cookie to determine current user)
+      final response = await request
+          .get('http://localhost:8000/json/?filter=my')
+          .timeout(const Duration(seconds: 10));
+
       var data = response;
-      
-      // Convert json data to ItemsEntry objects and filter by current user
+
       List<ItemsEntry> listItems = [];
       for (var d in data) {
         if (d != null) {
           listItems.add(ItemsEntry.fromJson(d));
         }
       }
-      
-      // Filter items to show only those created by the current user
-      List<ItemsEntry> myItems = listItems
-          .where((item) => item.username == currentUsername)
-          .toList();
-      
-      return myItems;
+
+      return listItems;
     } catch (e) {
-      // If fetching user info fails, return empty list
+      // If fetching fails or times out, return empty list to avoid blocking UI
       return [];
     }
   }

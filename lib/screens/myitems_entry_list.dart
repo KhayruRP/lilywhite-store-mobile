@@ -6,31 +6,28 @@ import 'package:lilywhite_store_mobile/widgets/items_entry_card.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 
-// Add this import at the top
-import 'package:lilywhite_store_mobile/screens/items_detail.dart';
-
-class ItemsEntryListPage extends StatefulWidget {
-  const ItemsEntryListPage({super.key});
+class MyItemsEntryListPage extends StatefulWidget {
+  const MyItemsEntryListPage({super.key});
 
   @override
-  State<ItemsEntryListPage> createState() => _ItemsEntryListPageState();
+  State<MyItemsEntryListPage> createState() => _MyItemsEntryListPageState();
 }
 
-class _ItemsEntryListPageState extends State<ItemsEntryListPage> {
-  Future<List<ItemsEntry>> fetchItems(CookieRequest request) async {
+class _MyItemsEntryListPageState extends State<MyItemsEntryListPage> {
+
+  Future<List<ItemsEntry>> fetchItemsMy(CookieRequest request) async {
     // TODO: Replace the URL with your app's URL and don't forget to add a trailing slash (/)!
     // To connect Android emulator with Django on localhost, use URL http://10.0.2.2/
     // If you using chrome,  use URL http://localhost:8000
     
-    final response = await request.get('http://localhost:8000/json/');
+    final response = await request.get('http://localhost:8000/json/?filter=my');
     
     // Decode response to json format
-    var data = response;
-    debugPrint(data.toString());
+    var myData = response;
     
     // Convert json data to ItemsEntry objects
     List<ItemsEntry> listItems = [];
-    for (var d in data) {
+    for (var d in myData) {
       if (d != null) {
         listItems.add(ItemsEntry.fromJson(d));
       }
@@ -43,11 +40,11 @@ class _ItemsEntryListPageState extends State<ItemsEntryListPage> {
     final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Items Entry List'),
+        title: const Text('My Products'),
       ),
       drawer: const LeftDrawer(),
       body: FutureBuilder(
-        future: fetchItems(request),
+        future: fetchItemsMy(request),
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.data == null) {
             return const Center(child: CircularProgressIndicator());
@@ -64,22 +61,22 @@ class _ItemsEntryListPageState extends State<ItemsEntryListPage> {
               );
             } else {
               return ListView.builder(
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (_, index) => ItemsEntryCard(
-                    items: snapshot.data![index],
-                    onTap: () {
-                      // Navigate to items detail page
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ItemsDetailPage(
-                            items: snapshot.data![index],
-                          ),
+                itemCount: snapshot.data!.length,
+                itemBuilder: (_, index) => ItemsEntryCard(
+                  items: snapshot.data![index],
+                  onTap: () {
+                    // Navigate to news detail page
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ItemsDetailPage(
+                          items: snapshot.data![index],
                         ),
-                      );
-                    },
-                  ),
-                );
+                      ),
+                    );
+                  },
+                ),
+              );
             }
           }
         },

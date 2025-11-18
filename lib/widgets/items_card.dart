@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lilywhite_store_mobile/screens/menu.dart';
 import 'package:lilywhite_store_mobile/screens/itemlist_form.dart';
 import 'package:lilywhite_store_mobile/screens/items_entry_list.dart';
-import 'package:lilywhite_store_mobile/screens/my_items.dart';
+import 'package:lilywhite_store_mobile/screens/myitems_entry_list.dart';
 import 'package:lilywhite_store_mobile/screens/login.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -47,7 +47,7 @@ class ItemCard extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const MyItemsPage()
+                      builder: (context) => const MyItemsEntryListPage()
                   ),
               );
           }
@@ -58,9 +58,10 @@ class ItemCard extends StatelessWidget {
               // To connect Android emulator with Django on localhost, use URL http://10.0.2.2/
               // If you using chrome,  use URL http://localhost:8000
               
-              final response = await request.logout(
-                  "http://localhost:80000/auth/logout/");
+                final response = await request.logout(
+                  "http://localhost:8000/auth/logout/");
               String message = response["message"];
+
               if (context.mounted) {
                   if (response['status']) {
                       String uname = response["username"];
