@@ -27,6 +27,7 @@ class ItemCard extends StatelessWidget {
         // Aksi ketika kartu ditekan.
         onTap: () async {
           // Navigate to ItemsFormPage if "Create Product" is tapped
+
           if (item.name == "Create Product") {
             Navigator.push(
               context,
@@ -59,7 +60,7 @@ class ItemCard extends StatelessWidget {
               // If you using chrome,  use URL http://localhost:8000
               
                 final response = await request.logout(
-                  "http://localhost:8000/auth/logout/");
+                  "https://khayru-rafamanda-storelilywhites.pbp.cs.ui.ac.id/auth/logout/");
               String message = response["message"];
 
               if (context.mounted) {

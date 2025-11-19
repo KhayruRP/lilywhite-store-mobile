@@ -33,7 +33,7 @@ class ItemsEntryCard extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(6),
                   child: Image.network(
-                    'http://localhost:8000/proxy-image/?url=${Uri.encodeComponent(items.thumbnail)}',
+                    'https://khayru-rafamanda-storelilywhites.pbp.cs.ui.ac.id/proxy-image/?url=${Uri.encodeComponent(items.thumbnail)}',
                     height: 150,
                     width: double.infinity,
                     fit: BoxFit.cover,

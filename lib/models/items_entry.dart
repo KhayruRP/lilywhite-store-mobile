@@ -41,7 +41,7 @@ class ItemsEntry {
         price: json["price"],
         content: json["content"],
         category: json["category"],
-        thumbnail: json["thumbnail"],
+        thumbnail: json["thumbnail"] ?? '',
         storeViews: json["store_views"],
         createdAt: DateTime.parse(json["created_at"]),
         isFeatured: json["is_featured"],
